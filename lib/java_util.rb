@@ -4,7 +4,7 @@ class JavaUtil
   def initialize(jdk_home=nil)
     @commands = {}
     @jdk_home = jdk_home || ENV['java_home']
-    @default_for_commands = {}
+    @default_for_command = {}
     @global_default = {}
     init_commands
   end
@@ -39,11 +39,28 @@ class JavaUtil
       end
     end
     
+    def update_or_concat_with_defaults(opts,defaults)
+      defaults.each do |key,value|
+        param = opts[key]
+        if !param
+          param = value
+        else
+          if param.is_a? Array
+            param << value
+            param.flatten!
+          end
+        end
+        opts[key] = param
+      end
+    end
+    
     def execute_command(cmd, *args)
       actual_command = @commands[cmd.to_sym]
       if args
         opts = {}
         opts.update args.pop if args.last.is_a? Hash
+        update_or_concat_with_defaults opts, @global_default
+        update_or_concat_with_defaults opts, @default_for_command[cmd.to_sym] if @default_for_command[cmd.to_sym]        
         opts.each do |key, value|
           param = value
           param = param.join File::PATH_SEPARATOR if param.is_a? Array
