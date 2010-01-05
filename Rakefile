@@ -3,6 +3,9 @@ require 'lib/java_util'
 
 task :default => :test
 
+raise 'Missing environment variable TOMCAT_DIR' unless ENV['TOMCAT_DIR']
+raise 'Missing environment variable JUNIT_DIR' unless ENV['JUNIT_DIR']
+
 SRC_FILES = FileList.new 'src/**/*.java'
 TST_FILES = FileList.new 'test/**/*.java'
 CLASSPATH = FileList.new "#{File.join(ENV['TOMCAT_DIR'], 'lib').gsub /\\/,'/'}/*.jar"

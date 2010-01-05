@@ -3,7 +3,8 @@ class JavaUtil
   
   def initialize(jdk_home=nil)
     @commands = {}
-    @jdk_home = jdk_home || ENV['java_home']
+    @jdk_home = jdk_home || ENV['JAVA_HOME']
+    raise 'Missing JAVA_HOME variable' unless @jdk_home
     @default_for_command = {}
     @global_default = {}
     init_commands
