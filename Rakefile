@@ -22,6 +22,8 @@ end
 desc "Creates the package after compilation"
 task :package => :compile do
   @java_util.jar '-cf output/target.jar -C output/classes .'
+  cp 'output/target.jar', 'WebContent/WEB-INF/lib'
+  @java_util.jar '-cf output/target.war -C WebContent .'
 end
 
 desc "Runs the tests after packaging"

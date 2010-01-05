@@ -68,6 +68,7 @@ class JavaUtil
         end
         actual_command = "#{actual_command} #{args.join ' '} "
       end
+      puts actual_command
       res = %x{#{actual_command}}
       puts res
       [$?,res]
