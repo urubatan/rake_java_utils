@@ -1,0 +1,7 @@
+Sample project on how to use Rake to build java projects.
+
+TODO:
+Needs better wrapper for java tasks.
+The JavaUtil ruby class needs to be testable, today it is not, this class needs lots of refactorings.
+The Rakefile needs more examples.
+More common tasks needs shortcuts, like creating WARs and EARs. 
