@@ -37,4 +37,5 @@ end
 desc "Clean up all the mess we created"
 task :clean do
   rm_f 'output'
+  rm_t 'WebContent/WEB-INF/lib/target.jar'
 end
