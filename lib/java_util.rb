@@ -28,7 +28,7 @@ class JavaUtil
   def default_parameter_for(met,param,value)
     params = @default_for_command[met] || {}
     params[param] = value
-    @default_for_command[met] = param
+    @default_for_command[met] = params
   end
   
   private
@@ -69,6 +69,7 @@ class JavaUtil
         actual_command = "#{actual_command} #{args.join ' '} "
       end
       res = %x{#{actual_command}}
+      puts res
       [$?,res]
     end
 end
